@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+    <div>
+        <h1>error</h1>
+        <div th:inline="text">error on the page.</div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+     <div th:replace="fragments/header :: header"/>
+     <div class="main-content">
+          <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
+          <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+          <a href="index.html" th:href="@{/index.html}">Back to Home Page</a>
+     </div>
+     <div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

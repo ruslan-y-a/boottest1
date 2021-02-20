@@ -1,0 +1,12 @@
+window.addEventListener('load', function() {
+	var searchElement = document.getElementById('tasklist');						
+			var request = new XMLHttpRequest();
+			request.onload = function() {
+				var tasks = JSON.parse(this.responseText);		
+				var il=tasks.length;
+				searchElement.innerText = 'task (' + il+ ')'; 				
+			};
+			request.open('GET', tasksUrl);
+			request.send();		
+	
+}, false);

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <form th:action="@{/tasks/delete}" method="POST">
+
+        <table border="1">
+            <tr>
+                <th></th>
+                <th>id</th>
+                <th>taskstatus</th>
+                <th>name</th>
+                <th>text</th>
+                <th>datestart</th>
+                <th>datelimit</th>
+                <th></th>
+            </tr>
+            <tr th:each ="task : ${list}">
+                <td> <input type="checkbox" id="id" name="id" th:value="${task.id}" th:checked="false" />  </li></td>
+                <td th:utext="${task.id}">...</td>
+                <td th:utext="${task.taskstatus}">...</td>
+                <td th:utext="${task.name}">...</td>
+                <td th:utext="${task.text}">...</td>
+                <td th:utext="${task.datestart}">...</td>
+                <td th:utext="${task.datelimit}">...</td>
+                <td>
+                    <a th:href="@{'/tasks/edit/'+${task.id}}"><img style="width:20px;" th:src="@{/img/edit.png}"></a>
+                </td>
+            </tr>
+        </table>
+        <p><button class="form__button"><a th:href="@{/tasks/edit}">Add </a></button></p>
+        <p><input class="form__button_danger" type="submit" value="Delete" /></p>
+    </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

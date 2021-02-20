@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <h1>Create a role:</h1>
+
+    <form th:action="@{/roles/save}"
+          th:object="${roles}" method="POST">
+
+        <div th:if="${roles.id != null}">  <input type="hidden"  th:field="*{id}"> </div>
+        role: <input type="text" th:field="*{role}" />  <br/>
+
+        <input type="submit" value="Save" />
+    </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

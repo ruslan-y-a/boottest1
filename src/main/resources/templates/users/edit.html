@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <h1>Create a Person:</h1>
+
+    <form th:action="@{/users/save}"
+          th:object="${users}" method="POST">
+
+        <div th:if="${users.id != null}">  <input type="hidden"  th:field="*{id}"> </div>
+
+        login:
+        <input type="text" th:field="*{login}" />
+        <br/>
+        password:
+        <input type="password" th:field="*{password}" />
+        <br/>
+        email:
+        <input type="email" th:field="*{email}" />
+        <br/>
+        <input type="submit" value="Save" />
+    </form>
+
+    <br/>
+
+    <!-- Check if errorMessage is not null and not empty -->
+
+    <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+        ...
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

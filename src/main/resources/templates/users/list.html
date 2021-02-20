@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+ <form th:action="@{/users/delete}" method="POST">
+
+    <table border="1">
+        <tr>
+            <th></th>
+            <th>id</th>
+            <th>login</th>
+            <th>email</th>
+            <th>roles</th>
+            <th>tasks</th>
+            <th></th>
+        </tr>
+        <tr th:each ="person : ${list}">
+            <td> <input type="checkbox" id="id" name="id" th:value="${person.id}" th:checked="false" />  </li></td>
+            <td th:utext="${person.id}">...</td>
+            <td th:utext="${person.login}">...</td>
+            <td th:utext="${person.email}">...</td>
+            <td>
+                      <ul th:each ="role : ${person.roles}">
+                         <li th:utext="${role}">...</li>
+                      </ul>
+            <td>
+                 <ul th:each ="task : ${person.tasksset}">
+                     <li th:utext="${task}">...</li>
+                 </ul>
+            </td>
+            <td>
+                <a th:href="@{'/users/edit/'+${person.id}}"><img style="width:20px;" th:src="@{/img/edit.png}"></a>
+<!-- @{/users/edit/(id=${person.id})} -->
+            </td>
+        </tr>
+    </table>
+     <p><button class="form__button"><a th:href="@{/users/edit}">Add </a></button></p>
+     <p><input class="form__button_danger" type="submit" value="Delete" /></p>
+ </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

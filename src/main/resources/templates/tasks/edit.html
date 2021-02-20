@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <h1>Create a Person:</h1>
+
+    <form th:action="@{/tasks/save}" th:object="${tasks}" method="POST">
+
+        <div th:if="${tasks.id != null}">  <input type="hidden"  th:field="*{id}"> </div>
+
+        taskstatus:
+    <!--    <input type="text" th:field="*{taskstatus}" />  -->
+        <select th:field="*{taskstatus}">
+            <option th:each="status : ${statuslist}"
+                    th:value="${status}"
+                    th:utext="${status}"/>
+        </select>
+        <br/>
+        name:
+        <input type="text" th:field="*{name}" />
+        <br/>
+        text:
+        <input type="text" th:field="*{text}" />
+        <br/>
+
+        datestart dd/MM/yyyy:
+        <input type="text" th:field="*{datestart}" />
+        <br/>
+        datelimit dd/MM/yyyy:
+        <input type="text" th:field="*{datelimit}" />
+        <br/>
+
+        <input type="submit" value="Save" />
+    </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

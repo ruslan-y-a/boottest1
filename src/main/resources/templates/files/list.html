@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <form th:action="@{/files/delete}" method="POST">
+        <td> <input type="checkbox" id="realdelete" name="realdelete" th:value="#{false}" th:checked="false" />  </li></td>
+        <table border="1">
+            <tr>
+                <th>*</th>
+                <th>id</th>
+                <th>url</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each ="file : ${list}">
+
+                <td> <input type="checkbox" id="id" name="id" th:value="${file.id}" th:checked="false" />  </li></td>
+                <td th:utext="${file.id}">...</td>
+                <td><a th:href="@{'/myfiles/'+${file.url}}"><span th:utext="${file.url}"></span></a></td>
+                <td>
+                    <a th:href="@{'/files/edit/'+${file.id}}"><img style="width:20px;" th:src="@{/img/edit.png}"></a>
+                </td>
+                <td>
+                    <button class="form__button"><a th:href="@{/files/download(filename=${file.url})}">download</a></button>
+                </td>
+                <td>
+                    <img style="width:40px;" th:src="@{'/myfiles/'+${file.url}}">
+                </td>
+            </tr>
+        </table>
+        <p><button class="form__button"><a th:href="@{/files/edit}">Add </a></button></p>
+        <p><input class="form__button_danger" type="submit" value="Delete" /></p>
+    </form>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

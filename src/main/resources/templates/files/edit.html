@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <h1>Create a file:</h1>
+
+    <form th:action="@{/files/save}" enctype="multipart/form-data" method="POST"> <!-- th:object="${files}" -->
+
+        <div th:if="${files.id != null}">  <input type="hidden" th:name="filesid" th:field="${files.id}"> </div>
+        <input type="file" id="file"  name="file"/>
+
+        <input type="submit" value="Save" />
+    </form>
+
+    <a class="main-menu__item_link" th:href="@{/files/list}">filesUrl</a>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

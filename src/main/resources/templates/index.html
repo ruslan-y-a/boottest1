@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="/fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="/fragments/header :: header"/>
+<div class="main-content">
+    <div>isAuthenticated</div>
+    <div sec:authorize="isAuthenticated()">
+        <a class="main-menu__item_link" th:href="@{/users/list}">usersUrl</a>
+        <a class="main-menu__item_link" th:href="@{/roles/list}">rolesUrl</a>
+        <a class="main-menu__item_link" th:href="@{/tasks/list}">tasksUrl</a>
+        <a class="main-menu__item_link" th:href="@{/files/list}">filesUrl</a>
+    </div>
+    <div>ROLE_ADMIN</div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a class="main-menu__item_link" th:href="@{/users/list}">usersUrl</a>
+        <a class="main-menu__item_link" th:href="@{/roles/list}">rolesUrl</a>
+    </div>
+    <div>ROLE_USER</div>
+    <div sec:authorize="hasRole('ROLE_USER')">
+        <a class="main-menu__item_link" th:href="@{/tasks/list}">tasksUrl</a>
+        <a class="main-menu__item_link" th:href="@{/files/list}">filesUrl</a>
+    </div>
+<!--
+    <h3>jjjjjjjjjjj</h3>
+    <div th:text="${#authorization.getAuthentication()}">1</div>
+-->
+    <h2>FREE ACCESS</h2>
+    <a class="main-menu__item_link" th:href="@{/users/list}">usersUrl</a>
+    <a class="main-menu__item_link" th:href="@{/roles/list}">rolesUrl</a>
+    <a class="main-menu__item_link" th:href="@{/tasks/list}">tasksUrl</a>
+    <a class="main-menu__item_link" th:href="@{/files/list}">filesUrl</a>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <form th:action="@{/roles/delete}" method="POST">
+
+        <table border="1">
+            <tr>
+                <th>id</th>
+                <th>role</th>
+                <th></th>
+            </tr>
+            <tr th:each ="urole : ${list}">
+                <td th:utext="${urole.id}">...</td>
+                <td th:utext="${urole.role}">...</td>
+                <td>
+                    <a href="@{'/roles/edit/'+${urole.id}}"><img style="width:20px;" th:src="@{/img/edit.png}"></a>
+                </td>
+            </tr>
+        </table>
+        <p><button class="form__button"><a th:href="@{/roles/edit}">Add </a></button></p>
+        <p><input class="form__button_danger" type="submit" value="Delete" /></p>
+    </form>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

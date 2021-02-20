@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="main-content">
+
+    <h1>Create roles:</h1>
+    <!--
+      <input type="checkbox" name="active" th:checked="${user.active}" />
+      <span th:if="${teacher.gender == 'F'}">Female</span>
+      <span th:unless="${teacher.gender == 'F'}">Male</span>
+      <div th:switch="${user.role}">
+          <p th:case="'admin'">User is an administrator</p>
+          <p th:case="#{roles.manager}">User is a manager</p>
+          <p th:case="*">User is some other thing</p>
+      </div>
+  -->
+      <form th:action="@{/users/role}" method="POST">
+
+        <div th:if="${users.id}">
+            <input type="hidden" name="usersid" th:value="${users.id}"/>
+            <input type="text" id="newrole"  name="newrole" th:placeholder="USER" />
+        </div>
+        <ul th:each ="role: ${roles}">
+        <!--    <ul th:each ="urole : ${users.roles}">
+                <li th:if="${urole} == ${role}">
+                   <input type="checkbox" name="sroles" th:checked="true" />
+             </li>
+              <li th:unless="${role == urole}">  -->
+            <li>     <input type="checkbox" id="sroles" name="sroles" th:value="${role.id}" th:checked="false" />  <span th:text="${role.role}"></span> </li>
+            <!--   </li>  -->
+
+          </ul>
+          <br/>
+
+
+         <br/>
+         <input type="submit" value="Save" />
+     </form>
+
+     <br/>
+     <!-- Check if errorMessage is not null and not empty -->
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:fragment="header-css">
+        <div>
+           <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+        </div>
+    </div>
+</head>
+    <body>
+    <div th:fragment="header">
+        <!-- this is header -->
+      <div class="header">
+        <meta charset="UTF-8">
+        <img class="banner__photo" th:src="@{/img/logo.png}">
+        <div th:with="title='New spring boot test'"><title th:utext="${title}"></title></div>
+
+          <div sec:authorize="isAuthenticated()">
+              <a class="main-menu__item_link" th:href="@{/logout}">logout</a><br/>
+              Login: <span sec:authentication="name"></span>
+              Roles: <span sec:authentication="principal.authorities"></span> <!-- <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
+          </div>
+          <div sec:authorize="!isAuthenticated()">
+              <a class="main-menu__item_link" th:href="@{/login}">login</a><br/>
+          </div>
+
+
+         <nav>
+            <div id="main-menu" class="main-menu">
+                <ul>
+                    <li class="main-menu__item"><a th:href="@{/}">Home</a></li>
+                    <li class="main-menu__item"><a th:href="@{/about}">about</a></li>
+                </ul>
+            </div>
+         </nav>
+      </div>
+  </div>
+</body>
+</html>
