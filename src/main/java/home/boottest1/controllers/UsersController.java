@@ -41,9 +41,9 @@ public class UsersController {
     @RequestMapping(value = {"/users/jlist" }, method = RequestMethod.GET)
     @ResponseBody
     public List<UsersDTO> jlist() throws LogicException {
-        List<Users> users= repo.findAll(); List<UsersDTO> usersDTO= new LinkedList<>();
-        users.forEach(x -> usersDTO.add(UsersDTO.importUser(x)));
-        return usersDTO;
+        List<Users> users= repo.findAll(); List<UsersDTO> jusers= new LinkedList<>();
+        users.forEach(x -> jusers.add(UsersDTO.importUser(x)));
+        return jusers;
     }
 
     @RequestMapping(value = "/users/list/{id}", method = RequestMethod.GET)

@@ -1,3 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="footer">
+    <div class="footer">
+        <footer>
+            <div><span>footer text</span></div>
+                <div id="main-menu" class="main-menu">
+                    <ul>
+                        <li class="main-menu__item"><a th:href="@{/}">Home</a></li>
+                        <li class="main-menu__item"><a th:href="@{/about}">about</a></li>
+                    </ul>
+                </div>
+            <button id="bt1">Load Fragment 1</button>
+
+            <div id="rolelist"></div>
+
+            <script>
+                $("#bt1").on("click", function () {
+                    $("#rolelist").load("/rolelist");
+                 });
+            </script>
+        </footer>
+    </div>
+</th:block>
+
+
+<!--
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">

@@ -3,6 +3,7 @@ package home.boottest1.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
+import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.context.WebApplicationContext;
@@ -89,13 +90,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-      //  registry.addViewController("/").setViewName("index.html");
-        registry.addViewController("/index").setViewName("index.html");
+             registry.addViewController("/index").setViewName("index.html");
         registry.addViewController("/about").setViewName("about.html");
         registry.addViewController("/error").setViewName("error.html");
         registry.addViewController("/403").setViewName("403.html");
         registry.addViewController("/login").setViewName("login.html");
         registry.addViewController("/logout").setViewName("logout.html");
+
 
     }
 

@@ -40,6 +40,8 @@ public class RolesController
         return rolesDTO;
     }
 
+
+
     @RequestMapping(value = { "/{id}", "/list/{id}" }, method = RequestMethod.GET)
     @ResponseBody
     public RolesDTO findById(Model model, @PathVariable("id") Long id) throws Exception {
